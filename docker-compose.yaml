@@ -1,14 +1,14 @@
 version: '3'
 services:
   fermentrack:
-    image: mpse2/fermentrack-docker
+    image: carjed/fermentrack-docker
     build: ./fermentrack
     container_name: fermentrack
     restart: always
     # Uncomment the next line if bluetooth support is going to be used.
     #network_mode: "host"
     # Uncomment this next line if bluetooth support and firmware flashing is used.
-    #privileged: true
+    privileged: true
     # portmapping is ignored when network_mode = host
     ports:
       - "81:8080"

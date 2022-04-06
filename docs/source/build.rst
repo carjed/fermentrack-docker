@@ -5,7 +5,7 @@ The docker image can be obtained via docker hub under the name
 
 ::
 
-    mpse2/fermentrack-docker
+    carjed/fermentrack-docker
 
 But if you want to build it yourself just clone the git repository and make sure you have docker and optionally docker-compose installed.
 

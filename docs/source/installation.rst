@@ -70,7 +70,7 @@ will be ignored and fermentrack will be accessed on port 8080 which is the defau
     version: '3'
     services:
     fermentrack:
-        image: mpse2/fermentrack-docker
+        image: carjed/fermentrack-docker
         container_name: fermentrack
         restart: always
         network_mode: "host"
@@ -89,7 +89,7 @@ If you dont need the functionallity described above use the following configurat
     version: '3'
     services:
     fermentrack:
-        image: mpse2/fermentrack-docker
+        image: carjed/fermentrack-docker
         container_name: fermentrack
         restart: always
         ports:

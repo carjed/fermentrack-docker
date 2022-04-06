@@ -16,7 +16,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=mpse2/fermentrack-docker
+          DOCKER_IMAGE=carjed/fermentrack-docker
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
 
@@ -70,7 +70,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/mpse2/fermentrack-docker:latest'
+          image-ref: 'docker.io/carjed/fermentrack-docker:latest'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
