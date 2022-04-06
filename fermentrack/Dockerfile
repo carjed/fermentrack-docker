@@ -50,7 +50,7 @@ USER fermentrack:fermentrack
 #
 # Clone the master branch of fermentrack into the image (updates will work afterwards)
 #
-RUN git clone https://github.com/thorrak/fermentrack.git /home/fermentrack/fermentrack
+RUN git clone --branch custom https://github.com/carjed/fermentrack.git /home/fermentrack/fermentrack
 #
 # Setup python and install the packages
 #
