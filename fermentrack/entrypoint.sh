@@ -55,11 +55,11 @@ EOF
 # Setting priviligies required for bluetooth support. If we cannot start python we are not running in priviligied mode.
 #
 echo "Checking if the container is running in priviliged mode"
-if setcap cap_net_raw,cap_net_admin+eip /usr/bin/python3.7 && python3 -h > /dev/null;
+if setcap cap_net_raw,cap_net_admin+eip /usr/bin/python3.9 && python3 -h > /dev/null;
 then
     echo "Container is running in priviligied mode"
 # We need to remove the setcap options or python will fail to start fermentrack. This might fail on an older linux kernel and stop the script.
-elif setcap -r /usr/bin/python3.7; 
+elif setcap -r /usr/bin/python3.9; 
 then 
     echo "Container is NOT running in priviligied mode (1)"
 else 
@@ -99,7 +99,7 @@ echo ""
 git log -n 1 --pretty=short
 echo "****************************************************************"
 
-echo "Starting circus deamon"
+echo "Starting circus daemon"
 #circusd --log-level DEBUG circus-docker.ini
 circusd circus-docker.ini
 EOF
