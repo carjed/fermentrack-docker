@@ -1,5 +1,6 @@
 # Rename this file to docker-compose.yaml
 version: '3'
+
 services:
   fermentrack:
     image: carjed/fermentrack-docker
