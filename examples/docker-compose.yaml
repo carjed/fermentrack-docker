@@ -1,10 +1,16 @@
-# Rename this file to docker-compose.yaml
+# Live deployment. Run from this directory:  docker compose build && docker compose up -d
 version: '3'
 
 services:
   fermentrack:
-    image: carjed/fermentrack-docker
-    # build: ./fermentrack
+    # Built locally from ../fermentrack (a local name, so "docker compose pull" can't replace it with the Docker Hub image)
+    image: fermentrack-local
+    build:
+      context: ../fermentrack
+      args:
+        FERMENTRACK_GITHUB: carjed/fermentrack
+        # Branch of the fermentrack repo to build. Switch back to "custom" once home-assistant-api is merged into it.
+        FERMENTRACK_REF: home-assistant-api
     container_name: fermentrack
     restart: always
     #network_mode: "host"

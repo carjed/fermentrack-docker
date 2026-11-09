@@ -41,6 +41,32 @@ These versions only exist for amd64 target and are based on ubuntu stable releas
 - v0.2.0 = fermentrack release 4d8d89b from 22 Aug 2020 but with additional code to disable git integration (not to break the installation)
 - v0.1.0 = fermentrack release 4d8d89b from 22 Aug 2020 (testing)
 
+## Updating a running install
+
+The live deployment runs from `examples/` (`examples/docker-compose.yaml`). The image clones the Fermentrack branch
+named by `FERMENTRACK_REF` in that file at build time. Your database, beer logs and settings live in
+`examples/volumes/` (ignored by git), and sensor/pin assignments and control constants live on the controller itself,
+so a rebuild keeps all of them.
+
+```bash
+cd examples
+cp -a volumes ~/fermentrack-volumes-backup-$(date +%F)   # back up first
+docker compose build                           # re-clones automatically if the branch has new commits
+docker compose up -d
+docker logs fermentrack | grep -A3 "Version/Source"   # confirm which commit is running
+```
+
+Rebuilding generates a new Django secret key, so you will need to log in to the web UI again.
+
+### Home Assistant
+
+Create the API token for the Home Assistant integration (see `home_assistant/README.md` in the Fermentrack repo):
+
+```bash
+docker exec -u fermentrack -w /home/fermentrack/fermentrack fermentrack \
+  bash -c 'DJANGO_SECRET_KEY=$(cat DJANGO_SECRET_KEY) DJANGO_ENABLE_SENTRY=False ~/venv/bin/python manage.py ha_api_token --regenerate'
+```
+
 ## Documentation
 
 Documentation has now been moved to the docs folder of the repository, here you can find the history and instructions for build and installation.

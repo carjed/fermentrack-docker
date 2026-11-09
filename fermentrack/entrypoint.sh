@@ -77,6 +77,10 @@ export DJANGO_ADMIN_URL=`cat /home/fermentrack/fermentrack/DJANGO_ADMIN_URL`/
 export DJANGO_ALLOWED_HOSTS=*
 export USE_DOCKER=True
 export DJANGO_SECURE_SSL_REDIRECT=False
+# Never show Django debug pages (tracebacks, settings) in this deployment
+export DJANGO_DEBUG=False
+# Don't send error reports to the upstream Fermentrack Sentry server
+export DJANGO_ENABLE_SENTRY=False
 export DJANGO_SERVER_EMAIL=
 export MAILGUN_API_KEY=
 export MAILGUN_DOMAIN=

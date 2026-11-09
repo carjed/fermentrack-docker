@@ -48,9 +48,18 @@ RUN usermod -a -G dialout fermentrack
 WORKDIR /home/fermentrack
 USER fermentrack:fermentrack
 #
-# Clone the master branch of fermentrack into the image (updates will work afterwards)
+# Clone fermentrack into the image. Override the GitHub repo/branch with build args, e.g.
+#   docker compose build --build-arg FERMENTRACK_REF=home-assistant-api
 #
-RUN git clone --branch custom https://github.com/carjed/fermentrack.git /home/fermentrack/fermentrack
+ARG FERMENTRACK_GITHUB=carjed/fermentrack
+ARG FERMENTRACK_REF=custom
+#
+# Cache-buster: Docker re-downloads remote ADD sources on every build and invalidates the following layers when the
+# content changes. This file contains the branch's head commit, so the clone below re-runs whenever the branch moves
+# (and stays cached when it hasn't).
+#
+ADD https://api.github.com/repos/${FERMENTRACK_GITHUB}/git/refs/heads/${FERMENTRACK_REF} /tmp/fermentrack-ref.json
+RUN git clone --branch ${FERMENTRACK_REF} https://github.com/${FERMENTRACK_GITHUB}.git /home/fermentrack/fermentrack
 #
 # Setup python and install the packages
 #
