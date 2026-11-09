@@ -5,3 +5,5 @@ docs/.env
 docs/build
 .env
 test/*
+examples/volumes/
+fermentrack/cookies.txt
