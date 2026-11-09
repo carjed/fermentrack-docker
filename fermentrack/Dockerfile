@@ -7,6 +7,15 @@ EXPOSE 8080/tcp
 # Install the needed dependecies, some are only used at the installphase so those will be removed later.
 #
 ENV DEBIAN_FRONTEND noninteractive
+#
+# Debian 11 (bullseye) is end-of-life and its packages have moved off the regular mirrors, so install from
+# archive.debian.org. (Staying on bullseye keeps Python 3.9, which Fermentrack's pinned dependencies require.)
+#
+RUN printf '%s\n' \
+  'deb http://archive.debian.org/debian bullseye main' \
+  'deb http://archive.debian.org/debian bullseye-updates main' \
+  'deb http://archive.debian.org/debian-security bullseye-security main' \
+  > /etc/apt/sources.list
 RUN apt-get update && apt-get install --no-install-recommends -y \
   nginx \
   redis-server \
