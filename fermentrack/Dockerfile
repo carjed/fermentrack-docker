@@ -84,8 +84,9 @@ ENV USE_DOCKER=true
 RUN python3 -m pip install virtualenv
 RUN virtualenv venv
 USER fermentrack
-RUN python3 -m pip install --no-binary numpy numpy==1.18.4
-RUN python3 -m pip install --no-binary pyzmq pyzmq==19.0.1
+# numpy is optional (only used for Tilt/iSpindel calibration). Use a prebuilt wheel: building old numpy from source
+# fails with current setuptools. pyzmq comes from requirements/base.txt (pinned version has a prebuilt wheel).
+RUN python3 -m pip install "numpy<2"
 RUN python3 -m pip install circus
 RUN python3 -m pip install --no-cache-dir -r /home/fermentrack/fermentrack/requirements/base.txt
 RUN chown -R fermentrack:fermentrack /home/fermentrack/venv
