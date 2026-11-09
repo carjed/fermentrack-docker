@@ -4,11 +4,15 @@ version: '3'
 services:
   fermentrack:
     image: carjed/fermentrack-docker
-    build: ./fermentrack
+    # build: ./fermentrack
     container_name: fermentrack
     restart: always
-    network_mode: "host"
+    #network_mode: "host"
     privileged: true
+    expose:
+        - "81"
+    ports:
+        - "81:8080"
     volumes:
         - ./volumes/db:/home/fermentrack/fermentrack/db
         - ./volumes/data:/home/fermentrack/fermentrack/data
