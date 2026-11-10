@@ -21,6 +21,9 @@ echo "Setting correct access rights on mounted volumes"
 chown -R fermentrack:fermentrack /home/fermentrack/fermentrack/db
 chown -R fermentrack:fermentrack /home/fermentrack/fermentrack/data
 chown -R fermentrack:fermentrack /home/fermentrack/fermentrack/log
+# backup_files may be a freshly mounted (empty, root-owned) volume: recreate its staging directory and fix ownership
+mkdir -p /home/fermentrack/fermentrack/backup_files/staging
+chown -R fermentrack:fermentrack /home/fermentrack/fermentrack/backup_files
 
 #
 # Print image version

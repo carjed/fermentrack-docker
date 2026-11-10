@@ -23,4 +23,6 @@ services:
         - ./volumes/db:/home/fermentrack/fermentrack/db
         - ./volumes/data:/home/fermentrack/fermentrack/data
         - ./volumes/log:/home/fermentrack/fermentrack/log
+        # Backups made in the web UI (Site settings > Backups). Without this they are lost on every rebuild.
+        - ./volumes/backups:/home/fermentrack/fermentrack/backup_files
         - /dev:/dev

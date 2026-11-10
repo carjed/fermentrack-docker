@@ -44,8 +44,8 @@ These versions only exist for amd64 target and are based on ubuntu stable releas
 ## Updating a running install
 
 The live deployment runs from `examples/` (`examples/docker-compose.yaml`). The image clones the Fermentrack branch
-named by `FERMENTRACK_REF` in that file at build time. Your database, beer logs and settings live in
-`examples/volumes/` (ignored by git), and sensor/pin assignments and control constants live on the controller itself,
+named by `FERMENTRACK_REF` in that file at build time. Your database, beer logs, settings and web-UI backups
+live in `examples/volumes/` (ignored by git), and sensor/pin assignments and control constants live on the controller itself,
 so a rebuild keeps all of them.
 
 ```bash
