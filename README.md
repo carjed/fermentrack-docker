@@ -53,10 +53,17 @@ cd examples
 cp -a volumes ~/fermentrack-volumes-backup-$(date +%F)   # back up first
 docker compose build                           # re-clones automatically if the branch has new commits
 docker compose up -d
+docker image prune -f                          # delete the previous, now-unused image
 docker logs fermentrack | grep -A3 "Version/Source"   # confirm which commit is running
 ```
 
 Rebuilding generates a new Django secret key, so you will need to log in to the web UI again.
+
+Each rebuild leaves the previous image behind (several hundred MB), which fills a small eMMC or SD card after a few
+updates. `docker image prune -f` removes only unnamed images that no container is using, so it is safe on every
+update; run it after `up -d`, once the old container has been replaced. Docker's build cache also grows over time:
+check it with `docker system df`, and if disk is tight, clear it with `docker builder prune -f` (the next build then
+re-runs every step, which is slow on a small board). Never add `--volumes` to a prune command.
 
 ### Home Assistant
 
