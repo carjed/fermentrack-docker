@@ -26,6 +26,13 @@ mkdir -p /home/fermentrack/fermentrack/backup_files/staging
 chown -R fermentrack:fermentrack /home/fermentrack/fermentrack/backup_files
 
 #
+# Remove stale BrewPi pid files. /tmp survives a container restart (including a host reboot), and the process IDs
+# written in these files get reused after a restart, so brewpi.py would think it is already running and refuse to start.
+# Nothing has started yet at this point, so every pid file here is stale.
+#
+rm -f /tmp/brewpi-*.pid
+
+#
 # Print image version
 #
 echo "Version of main linux packages installed in image:"
